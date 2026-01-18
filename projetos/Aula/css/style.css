@@ -1,0 +1,147 @@
+/* ============================
+   CONFIGURAÇÃO DO BODY – TEMPLATE COMPLETO
+   ============================ */
+
+body {
+
+  /* ---- Reset / Normalização ---- */
+  margin: 0;               /* Remove margem padrão do navegador */
+  padding: 0;              /* Remove padding padrão */
+  box-sizing: border-box;  /* Facilita cálculos de tamanho */
+
+  /* ---- Tipografia ---- */
+  font-family: Arial, Helvetica, sans-serif;   /* Fonte base */
+  font-size: 16px;                             /* Tamanho padrão */
+  font-weight: 400;                            /* Peso da fonte */
+  line-height: 1.5;                            /* Altura da linha */
+  color: #ffffff;                                 /* Cor do texto */
+
+  /* ---- Fundo (BACKGROUND) ---- */
+  background-color: #ddf0f0;                   /* Cor de fundo */
+  background-image: url('../img/bg.png');      /* Imagem de fundo */
+  background-size: cover;                      /* Cobre toda a tela */
+  background-repeat: no-repeat;                /* Não repetir imagem */
+  background-position: center;                 /* Centraliza imagem */
+  background-attachment: fixed;                /* Efeito parallax */
+
+  /* ---- Layout Geral ---- */
+  display: flex; 
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;          
+
+  min-height: 100vh;            /* Ocupa a altura total da tela */
+  width: 100%;                  /* Sempre ocupar toda a largura */
+
+  /* ---- Rolagem ---- */
+  overflow-x: hidden;           /* Evita scroll horizontal */
+  scroll-behavior: smooth;      /* Rolagem suave */
+
+
+  /* ---- Cursor ---- */
+  cursor: default;              /* Cursor padrão */
+}
+
+header {
+  display: flex;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #0f1419;
+  padding: 20px 60px;
+  border-bottom: 1px solid #1e2a36;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #2dd4bf;
+  padding-left: 60px;
+}
+
+nav {
+  display: flex;
+  gap: 30px;
+  padding-right: 50px;
+}
+
+nav a {
+  color: #9ca3af;
+  text-decoration: none;
+}
+
+nav a:hover {
+  color: #2dd4bf;
+}
+
+
+.lista :nth-child(3) {
+  color: blue;
+}
+
+.lista :not(:nth-child(odd)) {
+  color: rgb(201, 14, 14);
+}
+
+.lista li:hover {
+  font-size: 32px;
+}
+
+.Q07::selection{
+  color: red
+}
+
+.imagem {
+  position: relative;
+}
+
+.imagem:hover::after{
+  content: "ceci n'est pas une pipe" ;
+  width: 200px;
+  padding: 2px;
+  position : absolute ;
+  left: 60px;
+  top: 40px;
+  color: black;
+  background-color : #f0f0f0;
+  border: none;
+  border-radius : 3px;
+}
+
+@keyframes animação_A {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(200px); }
+}
+
+.caixa {
+  width: 100px;
+  height: 100px;
+  background: rgb(236, 172, 53);
+  margin-bottom: 40px;
+  animation: animação_A 2s ease-in-out infinite;
+}
+
+@keyframes animação_B {
+  0%, 100% { transform: scale(100%); }
+  50%      { transform: scale(200%); }
+}
+
+.bola {
+  width: 100px;
+  height: 100px;
+  background: rgb(232, 247, 20);
+  border-radius: 50%;
+  animation: animação_B 2s infinite;
+  animation-play-state: paused;
+}
+
+.bola:hover {
+  animation-play-state: running;
+}
+
+.imagemPNG {
+  filter: drop-shadow(15px 15px 5px black);
+}
