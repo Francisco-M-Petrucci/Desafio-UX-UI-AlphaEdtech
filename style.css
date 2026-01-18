@@ -8,18 +8,18 @@
   --primary-foreground: #F7F9F7;
   --muted: hsl(217, 33%, 22%);
   --muted-foreground: #DBF9F0;
-  --border: hsl(217, 33%, 25%);
+  --border: #000000;
   --accent: hsl(217, 33%, 22%);
   --radius: 0.75rem;
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-  --header: #838E83;
+  --header: #750D37;
   --nav-links: #ffffff;
   --text-title: #750D37;
-  --project-title: #B2BCAA;
-  --text-content-light: #FFFAFF;
+  --project-title: #023817;
+  --text-content-light: #C9CEBD;
   --text-content-dark: #023817;
 }
 
@@ -115,7 +115,7 @@ ul {
 .logo {
   font-size: 1.25rem;
   font-weight: 700;
-  color: var(--project-title);
+  color: var(--background);
   transition: color 0.2s;
 }
 
@@ -142,7 +142,7 @@ ul {
 }
 
 .nav-links a:hover {
-  color: var(--primary);
+  color: #7b8796;
 }
 
 /* Mobile Menu Toggle (CSS-only) */
@@ -291,7 +291,7 @@ ul {
   font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
-  background: var(--primary);
+  background: var(--background);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -311,7 +311,7 @@ ul {
 
 .hero-title {
   font-size: 1.25rem;
-  color: var(--muted-foreground);
+  color: var(--primary);
   margin-bottom: 1.5rem;
 }
 
@@ -373,7 +373,7 @@ ul {
 }
 
 .btn-outline {
-  background-color: transparent;
+  background-color: var(--primary);
   color: var(--foreground);
   border: 1px solid var(--border);
 }
@@ -437,8 +437,9 @@ ul {
 }
 
 /* Skills Section */
+/* Estilos Gerais da Seção */
 .skills {
-  padding: 5rem 0;
+  padding: 3rem 1rem; /* Reduzido para telas pequenas */
   background-color: var(--card);
 }
 
@@ -448,12 +449,21 @@ ul {
   }
 }
 
+/* Grid Responsivo */
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  /* Garante 1 coluna em telas muito pequenas (como 360px) para não quebrar o layout */
+  grid-template-columns: 1fr; 
   gap: 1rem;
   max-width: 56rem;
   margin: 0 auto;
+}
+
+/* Ajuste para celulares um pouco maiores e tablets */
+@media (min-width: 480px) {
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (min-width: 640px) {
@@ -470,16 +480,17 @@ ul {
   }
 }
 
+/* Card de Skill */
 .skill-card {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.75rem;
-  padding: 1.5rem 1rem;
+  padding: 1.25rem 0.75rem; /* Padding otimizado para 360px */
   background-color: var(--background);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  transition: all 0.3s;
+  transition: all 0.3s ease;
 }
 
 .skill-card:hover {
@@ -495,12 +506,14 @@ ul {
   }
 }
 
+/* Container do Ícone/Imagem */
 .skill-icon {
   width: 3rem;
   height: 3rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden; /* Garante que a imagem não saia do container */
 }
 
 @media (min-width: 640px) {
@@ -510,16 +523,21 @@ ul {
   }
 }
 
-.skill-icon svg {
+/* Estilização da Imagem Nova */
+.skill-img {
   width: 100%;
   height: 100%;
+  object-fit: contain; /* Mantém a proporção da imagem sem cortar */
+  display: block;
 }
 
+/* Nome da Skill */
 .skill-name {
   font-size: 0.875rem;
   font-weight: 500;
   text-align: center;
-  color: var(--text-content-dark)
+  color: var(--text-content-dark);
+  word-break: break-word; /* Evita que nomes longos quebrem o layout */
 }
 
 @media (min-width: 640px) {
