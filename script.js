@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
       heroDesc: "Aspirante a desenvolvedor com paixão por criar soluções inovadoras e eficientes.",
       heroBtns: ["Meus Projetos", "Entre em contato"],
       aboutTitle: "Sobre Mim",
-      aboutText: "Um desenvolvedor em ascensão com a paixão de construir aplicações web do zero. Estudante do curso de alta performance Alpha Edtech, estou no processo de aprender a criar interfaces responsivas e amigáveis ao usuário, além de sistemas backend robustos. Minhas outras habilidades incluem proficiência nível C2 na língua inglesa e uma forte capacidade de adaptação e aprendizado de novas tecnologias rapidamente.",
+      aboutText: "Um desenvolvedor em ascensão com a paixão de construir aplicações web do zero. Estudante do curso de alta performance Alpha Edtech, estou no processo de aprender a criar interfaces responsivas e amigáveis ao usuário, além de sistemas backend robustos. Minhas outras habilidades incluem proficiência nível C2 na língua inglesa, uma forte capacidade de adaptação e rápido aprendizado de novas tecnologias.",
       skillsTitle: "Habilidades & Ferramentas",
       projectsTitle: "Meus Projetos",
       projectTitles: ["Página de Exercícios CSS", "Replicação de Layout", "Página de Registro de Produtos"],
