@@ -13,14 +13,14 @@
   --radius: 0.75rem;
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px #750D37;
+  --shadow-xl: 0 20px 25px -5px #023817;
   --header: #750D37;
-  --nav-links: #ffffff;
+  --white-text: #ffffff;
   --text-title: #750D37;
-  --project-title: #023817;
+  --project-title: #000000;
   --text-content-light: #C9CEBD;
-  --text-content-dark: #023817;
+  --text-content-dark: #000000;
 }
 
 /* Reset & Base Styles */
@@ -115,12 +115,8 @@ ul {
 .logo {
   font-size: 1.25rem;
   font-weight: 700;
-  color: var(--background);
+  color: var(--white-text);
   transition: color 0.2s;
-}
-
-.logo:hover {
-  opacity: 0.8;
 }
 
 .nav-links {
@@ -136,13 +132,13 @@ ul {
 }
 
 .nav-links a {
-  color: var(--nav-links);
+  color: var(--background);
   font-weight: 500;
   transition: color 0.2s;
 }
 
 .nav-links a:hover {
-  color: #7b8796;
+  color: var(--white-text);
 }
 
 /* Mobile Menu Toggle (CSS-only) */
@@ -291,7 +287,7 @@ ul {
   font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
-  background: var(--background);
+  background: var(--white-text);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -323,7 +319,7 @@ ul {
 
 .hero-description {
   font-size: 1rem;
-  color: var(--text-content-light);
+  color: var(--background);
   max-width: 32rem;
   margin: 0 auto 2rem;
 }
@@ -356,32 +352,33 @@ ul {
   font-size: 0.875rem;
   font-weight: 500;
   border-radius: var(--radius);
-  transition: all 0.2s;
+  transition: all 0.3s ease;
   cursor: pointer;
   border: none;
   text-decoration: none;
+  position: relative;
 }
 
 .btn-primary {
-  background-color: var(--primary);
-  color: var(--primary-foreground);
+  background-color: var(--background);
+  color: var(--primary);
 }
 
 .btn-primary:hover {
-  opacity: 0.9;
-  transform: translateY(-2px);
-}
-
-.btn-outline {
   background-color: var(--primary);
-  color: var(--foreground);
-  border: 1px solid var(--border);
+  color: var(--white-text);
+  opacity: 1;
+  transform: translateY(-3px);
+  
+
+  box-shadow: 
+    0 0 10px var(--primary),
+    0 0 20px var(--primary),
+    0 0 40px var(--primary);
+    
+  filter: brightness(1);
 }
 
-.btn-outline:hover {
-  background-color: var(--accent);
-  border-color: var(--primary);
-}
 
 /* Section Styles */
 .section-title {
@@ -390,6 +387,21 @@ ul {
   text-align: center;
   margin-bottom: 1rem;
   color: var(--text-title);
+}
+
+@media (min-width: 640px) {
+  .section-title {
+    font-size: 2.25rem;
+  }
+}
+
+/* Section Styles COPIADA */
+.section-title2 {
+  font-size: 1.875rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #ffffff;
 }
 
 @media (min-width: 640px) {
@@ -439,7 +451,7 @@ ul {
 /* Skills Section */
 /* Estilos Gerais da Seção */
 .skills {
-  padding: 3rem 1rem; /* Reduzido para telas pequenas */
+  padding: 3rem 1rem;
   background-color: var(--card);
 }
 
@@ -452,7 +464,6 @@ ul {
 /* Grid Responsivo */
 .skills-grid {
   display: grid;
-  /* Garante 1 coluna em telas muito pequenas (como 360px) para não quebrar o layout */
   grid-template-columns: 1fr; 
   gap: 1rem;
   max-width: 56rem;
@@ -486,17 +497,31 @@ ul {
   flex-direction: column;
   align-items: center;
   gap: 0.75rem;
-  padding: 1.25rem 0.75rem; /* Padding otimizado para 360px */
+  padding: 1.25rem 0.75rem;
   background-color: var(--background);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   transition: all 0.3s ease;
+  overflow: hidden; /* Garante que nada saia dos limites do card */
+  cursor: pointer;
 }
 
+/* Efeito de Hover no Card */
 .skill-card:hover {
   border-color: var(--primary);
   transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
+  /* box-shadow: var(--shadow-lg); */
+}
+
+/* Aumenta o Ícone quando o Card recebe Hover */
+.skill-card:hover .skill-icon {
+  transform: scale(1.3);
+}
+
+/* Aumenta o Texto quando o Card recebe Hover */
+.skill-card:hover .skill-name {
+  transform: scale(1.2);
+  color: var(--primary); /* Opcional: muda a cor para destacar */
 }
 
 @media (min-width: 640px) {
@@ -513,7 +538,8 @@ ul {
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden; /* Garante que a imagem não saia do container */
+  overflow: hidden;
+  transition: transform 0.3s ease; /* Suaviza o aumento de tamanho */
 }
 
 @media (min-width: 640px) {
@@ -523,11 +549,11 @@ ul {
   }
 }
 
-/* Estilização da Imagem Nova */
+/* Estilização da Imagem */
 .skill-img {
   width: 100%;
   height: 100%;
-  object-fit: contain; /* Mantém a proporção da imagem sem cortar */
+  object-fit: contain;
   display: block;
 }
 
@@ -537,7 +563,9 @@ ul {
   font-weight: 500;
   text-align: center;
   color: var(--text-content-dark);
-  word-break: break-word; /* Evita que nomes longos quebrem o layout */
+  word-break: break-word;
+  transition: all 0.4s ease; /* Suaviza o aumento e troca de cor */
+  display: inline-block; /* Necessário para o transform scale funcionar bem */
 }
 
 @media (min-width: 640px) {
@@ -591,7 +619,6 @@ ul {
 
 .project-card:hover {
   border-color: var(--primary);
-  box-shadow: var(--shadow-xl);
 }
 
 .project-image {
@@ -667,7 +694,7 @@ ul {
 
 /* Contact Section */
 .contact {
-  padding: 5rem 0;
+  padding: 4rem 1rem; /* Padding ajustado para mobile */
   background-color: var(--background);
 }
 
@@ -677,12 +704,36 @@ ul {
   }
 }
 
+/* Wrapper principal que divide esquerda e direita */
+.contact-wrapper {
+  display: grid;
+  grid-template-columns: 1fr; /* Mobile: 1 coluna */
+  gap: 3rem;
+  margin-top: 3rem;
+}
+
+@media (min-width: 768px) {
+  .contact-wrapper {
+    grid-template-columns: 1fr 1fr; /* Desktop/Tablet: 2 colunas */
+    gap: 4rem;
+    align-items: start;
+  }
+}
+
+/* Coluna Esquerda: Texto e Sociais */
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
 .contact-text {
-  text-align: center;
+  text-align: left; /* Alinhado à esquerda como pedido */
   font-size: 1rem;
+  line-height: 1.6;
   color: var(--text-content-dark);
-  max-width: 32rem;
-  margin: 0 auto 2rem;
+  max-width: 100%;
+  margin: 0;
 }
 
 @media (min-width: 640px) {
@@ -694,10 +745,11 @@ ul {
 .social-links {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start; /* Alinhado à esquerda */
   gap: 1rem;
 }
 
+/* Estilo dos Botões Sociais */
 .social-link {
   display: flex;
   align-items: center;
@@ -708,18 +760,113 @@ ul {
   border: 1px solid var(--border);
   border-radius: 50%;
   color: var(--muted-foreground);
-  transition: all 0.3s;
+  transition: all 0.3s ease;
 }
 
 .social-link:hover {
   color: var(--primary);
   border-color: var(--primary);
   transform: translateY(-4px);
+  /* Opcional: Efeito Neon suave nos ícones também */
+  /* box-shadow: 0 0 10px var(--primary);  */
 }
 
 .social-link svg {
   width: 1.5rem;
   height: 1.5rem;
+}
+
+/* Coluna Direita: Formulário */
+.contact-form-container {
+  background-color: var(--card);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+@media (min-width: 640px) {
+  .contact-form-container {
+    padding: 2rem;
+  }
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-content-dark);
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background-color: var(--background);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-content-dark);
+  font-size: 0.95rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  font-family: inherit;
+}
+
+.form-textarea {
+  resize: vertical; /* Permite redimensionar apenas altura */
+  min-height: 100px;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.1); /* Ajuste se tiver var RGB */
+}
+
+/* Button Styles (Reutilizando seu estilo anterior) */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: var(--radius);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  position: relative;
+  width: 100%; /* Botão ocupa largura total no mobile/form */
+}
+
+@media (min-width: 640px) {
+  .btn {
+    width: auto; /* Volta ao tamanho normal em telas maiores */
+    align-self: flex-start;
+  }
+}
+
+.btn-contact {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.btn-contact:hover {
+  transform: translateY(-3px);
+  box-shadow: 
+    0 0 10px var(--primary),
+    0 0 20px var(--primary);
+  filter: brightness(1.2);
 }
 
 /* Footer */
@@ -735,7 +882,7 @@ ul {
 
 .footer-copyright {
   font-size: 0.875rem;
-  color: var(--muted-foreground);
+  color: var(--background);
   margin-bottom: 0.25rem;
 }
 
