@@ -118,7 +118,6 @@ ul {
 .btn-language:hover {
   border-color: var(--white-text);
   color: var(--white-text);
-  /* background-color: rgba(255, 255, 255, 0.05); */
 }
 
 .btn-language svg {
@@ -129,19 +128,13 @@ ul {
   .nav-links {
     display: flex;
     align-items: center;
-    gap: 1.5rem; /* Espaço entre os links e o botão */
+    gap: 1.5rem;
   }
 }
 
 @media (max-width: 480px) {
   .logo {
-    font-size: 1rem; /* Diminui um pouco o logo para caber tudo */
-  }
-  .btn-language span {
-    display: none; /* Esconde o texto "Pt-Br" em telas minúsculas, deixa só o ícone */
-  }
-  .btn-language {
-    padding: 0.4rem;
+    font-size: 1rem; 
   }
 }
 
@@ -253,11 +246,29 @@ ul {
   display: none;
   position: absolute;
   top: 100%;
-  left: 0;
+  left: auto;
   right: 0;
+  width: 160px;
+  min-width: 160px;
   background-color: var(--card);
-  border-top: 1px solid var(--border);
+  border-left: 2px solid var(--border);
+  border-bottom: 2px solid var(--border);
+  border-bottom-left-radius: var(--radius);
+  border-color: var(--primary);
   padding: 1rem 0;
+  text-align: right;
+  animation: slideInRight 0.3s ease-out;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px); /* Começa um pouco para fora da tela */
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .menu-toggle:checked ~ .mobile-nav {
@@ -271,7 +282,13 @@ ul {
 }
 
 .mobile-nav li {
-  padding: 0 1rem;
+  padding: 0 1.5rem 0 1rem;
+}
+
+.mobile-nav li.mobile-lang-wrapper {
+  display: flex;
+  justify-content: flex-end; /* Empurra o botão para a direita */
+  padding: 0.5rem 1rem;      /* Mantém o alinhamento com os outros links */
 }
 
 .mobile-nav a {
@@ -280,6 +297,8 @@ ul {
   color: rgba(248, 250, 252, 0.8);
   border-radius: 0.375rem;
   transition: all 0.2s;
+  width: 100%;
+  font-weight: 500;
 }
 
 .mobile-nav a:hover {
@@ -294,32 +313,51 @@ ul {
   align-items: center;
   justify-content: center;
   padding: 5rem 1rem 3rem;
-  background: var(--card)
-  /* background: linear-gradient(135deg, var(--background) 0%, var(--card) 100%); */
+  background: var(--card);
 }
 
-@media (min-width: 640px) {
-  .hero {
-    padding: 5rem 1.5rem 3rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .hero {
-    padding: 5rem 2rem 3rem;
-  }
-}
+@media (min-width: 640px) { .hero { padding: 5rem 1.5rem 3rem; } }
+@media (min-width: 1024px) { .hero { padding: 5rem 2rem 3rem; } }
 
 .hero-content {
   text-align: center;
   max-width: 48rem;
-  animation: fadeIn 0.8s ease-out;
 }
 
-@keyframes fadeIn {
+/* --- ANIMAÇÕES --- */
+
+.hero-name, 
+.hero-title, 
+.hero-description, 
+.hero-buttons {
+  opacity: 0;
+  animation: revealUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+/* Stagger */
+.hero-name { 
+  animation-delay: 0.1s; 
+  /* letter-spacing: -1px; */
+  animation-name: easeIn 0.5s ease-in forwards;
+}
+
+.hero-title { 
+  animation-delay: 0.3s; 
+}
+
+.hero-description { 
+  animation-delay: 0.5s; 
+}
+
+.hero-buttons { 
+  animation-delay: 0.9s; 
+}
+
+/* Keyframes */
+@keyframes revealUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(200px);
   }
   to {
     opacity: 1;
@@ -327,7 +365,17 @@ ul {
   }
 }
 
+@keyframes trackingExpand {
+  from { letter-spacing: -20px; }
+  to { letter-spacing: normal; }
+}
 
+@keyframes easeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Estilização dos Elementos */
 .hero-name {
   font-size: 2.5rem;
   font-weight: 700;
@@ -338,15 +386,13 @@ ul {
   background-clip: text;
 }
 
-@media (min-width: 640px) {
-  .hero-name {
-    font-size: 3.75rem;
-  }
-}
+@media (min-width: 640px) { .hero-name { font-size: 3.75rem; } }
+@media (min-width: 1024px) { .hero-name { font-size: 4.5rem; } }
 
-@media (min-width: 1024px) {
+@media (max-width: 642px) {
   .hero-name {
-    font-size: 4.5rem;
+    animation: easeIn 0.5s ease-in forwards;
+    opacity: 1;
   }
 }
 
@@ -355,26 +401,21 @@ ul {
   font-weight: 700;
   color: var(--primary);
   margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
-@media (min-width: 640px) {
-  .hero-title {
-    font-size: 1.5rem;
-  }
-}
+@media (min-width: 640px) { .hero-title { font-size: 1.5rem; } }
 
 .hero-description {
   font-size: 1rem;
   color: var(--background);
   max-width: 32rem;
   margin: 0 auto 2rem;
+  line-height: 1.6;
 }
 
-@media (min-width: 640px) {
-  .hero-description {
-    font-size: 1.125rem;
-  }
-}
+@media (min-width: 640px) { .hero-description { font-size: 1.125rem; } }
 
 .hero-buttons {
   display: flex;
@@ -383,26 +424,21 @@ ul {
   justify-content: center;
 }
 
-@media (min-width: 640px) {
-  .hero-buttons {
-    flex-direction: row;
-  }
-}
+@media (min-width: 640px) { .hero-buttons { flex-direction: row; } }
 
-/* Buttons */
+/* Botões */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 0.75rem 1.5rem;
   font-size: 0.875rem;
-  font-weight: 500;
+  font-weight: 600;
   border-radius: var(--radius);
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Efeito elástico no hover */
   cursor: pointer;
   border: none;
   text-decoration: none;
-  position: relative;
 }
 
 .btn-primary {
@@ -413,14 +449,11 @@ ul {
 .btn-primary:hover {
   background-color: var(--primary);
   color: var(--white-text);
-  opacity: 1;
   transform: translateY(-3px);
-  
-
   box-shadow: 
-    0 0 10px var(--primary),
-    0 0 20px var(--primary),
-    0 0 40px var(--primary);
+      0 0 10px var(--primary),
+    0 0 30px var(--primary),
+    0 0 50px var(--primary);
     
   filter: brightness(1);
 }
@@ -441,7 +474,6 @@ ul {
   }
 }
 
-/* Section Styles COPIADA */
 .section-title2 {
   font-size: 1.875rem;
   font-weight: 700;
@@ -496,7 +528,6 @@ ul {
 }
 
 /* Skills Section */
-/* Estilos Gerais da Seção */
 .skills {
   padding: 3rem 1rem;
   background-color: var(--card);
@@ -517,7 +548,6 @@ ul {
   margin: 0 auto;
 }
 
-/* Ajuste para celulares um pouco maiores e tablets */
 @media (min-width: 480px) {
   .skills-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -549,25 +579,22 @@ ul {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   transition: all 0.3s ease;
-  overflow: hidden; /* Garante que nada saia dos limites do card */
+  overflow: hidden;
   cursor: pointer;
 }
 
-/* Efeito de Hover no Card */
 .skill-card:hover {
   border-color: var(--primary);
   transform: translateY(-4px);
 }
 
-/* Aumenta o Ícone quando o Card recebe Hover */
 .skill-card:hover .skill-icon {
   transform: scale(1.3);
 }
 
-/* Aumenta o Texto quando o Card recebe Hover */
 .skill-card:hover .skill-name {
   transform: scale(1.2);
-  color: var(--primary); /* Opcional: muda a cor para destacar */
+  color: var(--primary);
 }
 
 @media (min-width: 640px) {
@@ -585,7 +612,7 @@ ul {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  transition: transform 0.3s ease; /* Suaviza o aumento de tamanho */
+  transition: transform 0.3s ease;
 }
 
 @media (min-width: 640px) {
@@ -610,8 +637,8 @@ ul {
   text-align: center;
   color: var(--text-content-dark);
   word-break: break-word;
-  transition: all 0.4s ease; /* Suaviza o aumento e troca de cor */
-  display: inline-block; /* Necessário para o transform scale funcionar bem */
+  transition: all 0.4s ease;
+  display: inline-block;
 }
 
 @media (min-width: 640px) {
@@ -740,7 +767,7 @@ ul {
 
 /* Contact Section */
 .contact {
-  padding: 4rem 1rem; /* Padding ajustado para mobile */
+  padding: 4rem 1rem;
   background-color: var(--background);
 }
 
@@ -750,7 +777,7 @@ ul {
   }
 }
 
-/* Wrapper principal que divide esquerda e direita */
+/* Wrapper */
 .contact-wrapper {
   display: grid;
   grid-template-columns: 1fr; /* Mobile: 1 coluna */
@@ -774,7 +801,7 @@ ul {
 }
 
 .contact-text {
-  text-align: left; /* Alinhado à esquerda como pedido */
+  text-align: left;
   font-size: 1rem;
   line-height: 1.6;
   color: var(--text-content-dark);
@@ -791,7 +818,7 @@ ul {
 .social-links {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start; /* Alinhado à esquerda */
+  justify-content: flex-start;
   gap: 1rem;
 }
 
@@ -813,8 +840,6 @@ ul {
   color: var(--primary);
   border-color: var(--primary);
   transform: translateY(-4px);
-  /* Opcional: Efeito Neon suave nos ícones também */
-  /* box-shadow: 0 0 10px var(--primary);  */
 }
 
 .social-link svg {
@@ -868,14 +893,14 @@ ul {
 }
 
 .form-textarea {
-  resize: vertical; /* Permite redimensionar apenas altura */
+  resize: vertical;
   min-height: 100px;
 }
 
 .form-input:focus {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.1); /* Ajuste se tiver var RGB */
+  box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.1);
 }
 
 @media (min-width: 640px) {
@@ -920,7 +945,7 @@ ul {
   color: var(--white-text);
 }
 
-/* Transição suave apenas para os textos */
+/* Transição suave para os textos */
 .lang-transition {
   transition: opacity 0.2s ease-in-out;
 }
